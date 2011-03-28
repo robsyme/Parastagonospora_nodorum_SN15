@@ -6,8 +6,12 @@ Non-model resources often have a set of gene models that evolve quite quickly, a
 Genomes Currently Available
 ----------
 
-### Stagonospora nodorum sn15
+### Stagonospora nodorum sn15 ###
 
-S. nodorum sn15 was the first genome published by the ACNFP [[citation needed]]. 
+S. nodorum sn15 was the first genome published by the ACNFP ([Hane et al., 2007](http://dx.doi.org/10.1105/tpc.107.052829)).
 
-
+Genomes Coming Soon
+----------
+### Stagonospora nodorum sn79-1087 ###
+### Stagonospora nodorum sn4 ###
+### Pyrenophora teres sp. teres ###
