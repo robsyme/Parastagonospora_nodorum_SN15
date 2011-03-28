@@ -10,7 +10,7 @@ File.open(ARGV.shift).each do |line|
   gene_versions[id] = version
 end
 
-File.open("Error_lines.txt",'w') do |errors|
+File.open("temp_data/manual_check_needed.txt",'w') do |errors|
   File.open(ARGV.shift).each do |line|
     next if line.match(/^#/)
     locus, version =  gene_versions.find{|locus,version| line[locus]}
