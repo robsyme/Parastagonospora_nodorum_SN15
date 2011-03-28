@@ -1,10 +1,11 @@
 ACNFP Gene Models
 ==========
 
-Non-model resources often have a set of gene models that evolve quite quickly, and it is easy to lose track of why particular genes were added, removed or modified.
+Recently-sequenced non-model organisms often have a set of gene models that evolve quite quickly, and it is easy to lose track of why particular genes were added, removed or modified.
 Checking final models into NCBI is the endpoint, but it in't feasible if you are going repeated rounds of gene model adjustment.
-Checking our gene models into version control allows us to track who editied which models and why (assuming that people leave sensible commit messages). It also allows us to apply pre-commit hooks to ensure that the changes made do not result in incomprehensible gene models. NOTE: The hooks are yet to be finalised. The hooks will check to ensure that features are not left orphaned (eg: mRNA without gene) and that each protein does not include premature stop codons.
+Checking our gene models into version control allows us to track who editied which models and why (assuming that people leave sensible commit messages). 
 
+* * * * *
 Genomes Currently Available
 ----------
 
@@ -20,8 +21,14 @@ Genomes Coming Soon
 ### Pyrenophora teres sp. teres ###
 
 
+* * * * *
 Wishlist (TODO)
 ----------
+
+### Split Repo Into Public and Private ###
+NOTE: This may not be necessary.
+At the moment, anyone who can see the master branch can also see us working behind the scenes. It might be cleaner to have two repos: A public repo that takes major version upgrades, and a private repo that only the group can see. It is easy to push the private master up to the public repo for people to see. This adds an extra level of complication, and may not be necessary. I don't think people will really care about our draft branches anyway.
+
 ### Gene Model Validation via git-hooks ###
 It is likely that at some point, mistakes will be made with gene model corrections. A number of simple mistakes could be identified before the changes are commited by having a script do a quick sanity check before commits.
 
