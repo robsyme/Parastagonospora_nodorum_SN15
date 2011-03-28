@@ -15,3 +15,22 @@ Genomes Coming Soon
 ### Stagonospora nodorum sn79-1087 ###
 ### Stagonospora nodorum sn4 ###
 ### Pyrenophora teres sp. teres ###
+
+
+Wishlist (TODO)
+----------
+### Wiki ###
+It would be nice to run through each of the genes and generate a wiki page for each. Less structured information could then be added by those that are not comfortable with the command line and git. Perhaps a basic template can be set up that has defined fields that are then scraped by a commit hook that updates the gff. An example of a set field might be a boolean flag "Has this gene model been confirmed by experimental data?".
+This approach of bi-directional updates might be a little fragile, but the fragility could be mitigated by a very formal gene wiki page template with a small number of very strict fields. Of course, the rest of the wiki page for each gene would be completely editable, allowing for informal notes to be taken.
+#### PROS ####
+- Keeps all relevant data in the same place
+- Easy to control access
+- Free version control of the wiki
+- Easy layout control
+
+### CONS ###
+- Might be dangerous to let the gff be editable from the wiki (via hooks)
+- Might be too complicated
+- Github will sanitize javascript, so no fancy canvas tag renderings. This would have been awesome, but something similar might be possible with svg (including links!).
+
+
