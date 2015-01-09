@@ -65,6 +65,5 @@ features.each do |key, value|
     else
       $stderr.puts "Protein #{key} is invalid"
     end      
-    puts seq.to_fasta(key, 80)
   end
 end
