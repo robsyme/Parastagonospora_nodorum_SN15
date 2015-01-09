@@ -1,7 +1,7 @@
 *~
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.des
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.esq
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.md5
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.ois
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.sds
-/seq/Parastagonospora_nodorum_SN15_scaffolds.fasta.ssp
+*.fasta.des
+*.fasta.esq
+*.fasta.md5
+*.fasta.ois
+*.fasta.sds
+*.fasta.ssp
