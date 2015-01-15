@@ -54,14 +54,14 @@ features.each do |key, value|
     seq = Bio::Sequence::NA.new(a.join).translate
     ok = true
     if seq.composition["*"] <= 1
-      puts seq.to_fasta(key, 80)
+      puts seq[0..-2].to_fasta(key, 80)
     else
       $stderr.puts "Protein #{key} is invalid"
     end      
   else
     seq = Bio::Sequence::NA.new(a.join).reverse_complement.translate
     if seq.composition["*"] <= 1
-      puts seq.to_fasta(key, 80)
+      puts seq[0..-2].to_fasta(key, 80)
     else
       $stderr.puts "Protein #{key} is invalid"
     end      
