@@ -36,16 +36,16 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-features = Hash.new{|hash, key| hash[key] = []}
+cds_features = Hash.new{|hash, key| hash[key] = []}
 File.open(options.gff, 'r').each.find_all do |line|
   line =~ /\tCDS\t/
 end.each do |line|
   split = line.chomp.split("\t")
   attributes = Hash[split[8].split(";").map{|pair| pair.split("=")}]
-  features[attributes["Parent"]] << split
+  cds_features[attributes["Parent"]] << split
 end
 
-features.each do |key, value|
+cds_features.each do |key, value|
   a = value
     .sort_by{|split| split[3].to_i}
     .map{|split| options.fasta[split[0]].subseq(split[3].to_i, split[4].to_i)}
