@@ -34,8 +34,8 @@ intron_lengths = gff
     .each_cons(2)
     .map{ |a, b| b.start - a.end - 1 }
 end
-$stderr.puts "Intron length mean: #{intron_lengths.mean}"
-$stderr.puts "Intron length stddev: #{intron_lengths.standard_deviation}"
+puts "Intron length mean: #{intron_lengths.mean}"
+puts "Intron length stddev: #{intron_lengths.standard_deviation}"
 
 cds_lengths = gff
   .records
@@ -45,9 +45,9 @@ cds_lengths = gff
   .flat_map do |records|
   records.inject(0){ |mem, record| mem += record.end - record.start + 1 }
 end
-$stderr.puts "CDS length mean: #{cds_lengths.mean} bp"
-$stderr.puts "CDS length stddev: #{cds_lengths.standard_deviation} bp"
-$stderr.puts "CDS count: #{cds_lengths.count}"
+puts "CDS length mean: #{cds_lengths.mean} bp"
+puts "CDS length stddev: #{cds_lengths.standard_deviation} bp"
+puts "CDS count: #{cds_lengths.count}"
 
 cds_per_gene = gff
   .records
@@ -57,8 +57,8 @@ cds_per_gene = gff
   .flat_map do |records|
   records.length
 end
-$stderr.puts "CDS counts per gene mean: #{cds_per_gene.mean}"
-$stderr.puts "CDS counts per gene stddev: #{cds_per_gene.standard_deviation}"
+puts "CDS counts per gene mean: #{cds_per_gene.mean}"
+puts "CDS counts per gene stddev: #{cds_per_gene.standard_deviation}"
 
 intergenic_lengths = gff
   .records
@@ -71,8 +71,8 @@ intergenic_lengths = gff
     .map{ |a, b| b.start - a.end - 1 }
 end
 
-$stderr.puts "Intergenic length mean: #{intergenic_lengths.mean}"
-$stderr.puts "Intergenic length stddev: #{intergenic_lengths.standard_deviation}"
+puts "Intergenic length mean: #{intergenic_lengths.mean}"
+puts "Intergenic length stddev: #{intergenic_lengths.standard_deviation}"
 
 gene_count = gff
   .records
