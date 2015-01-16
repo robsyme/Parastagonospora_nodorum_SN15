@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'bio'
-require 'set'
 
 module Enumerable
   def sum
@@ -23,23 +22,61 @@ module Enumerable
 end
 
 gff = Bio::GFF::GFF3.new(File.read(ARGV.shift))
-count = Hash.new(0)
-gff.records
-  .find_all{ |record| record.feature == "CDS"}
-  .map{ |record| attr = Hash[record.attributes]["Parent"] }
-  .each{ |parent| count[parent] += 1 }
-puts "Average exon count = #{count.values.mean}"
 
-scaffolds = gff.records.map{ |record| record.seqname }.compact.to_set
+intron_lengths = gff
+  .records
+  .find_all{ |record| record.feature == "CDS" }
+  .group_by{ |record| Hash[record.attributes]["Parent"] }
+  .values
+  .flat_map do |records|
+  records
+    .sort_by{ |record| record.start }
+    .each_cons(2)
+    .map{ |a, b| b.start - a.end - 1 }
+end
+$stderr.puts "Intron length mean: #{intron_lengths.mean}"
+$stderr.puts "Intron length stddev: #{intron_lengths.standard_deviation}"
 
-intergenic_distances = scaffolds.flat_map do |scaffold|
-  gff.records
-    .find_all{ |record| record.seqname == scaffold && record.feature == "gene"}
+cds_lengths = gff
+  .records
+  .find_all{ |record| record.feature == "CDS" }
+  .group_by{ |record| Hash[record.attributes]["Parent"] }
+  .values
+  .flat_map do |records|
+  records.inject(0){ |mem, record| mem += record.end - record.start + 1 }
+end
+$stderr.puts "CDS length mean: #{cds_lengths.mean} bp"
+$stderr.puts "CDS length stddev: #{cds_lengths.standard_deviation} bp"
+$stderr.puts "CDS count: #{cds_lengths.count}"
+
+cds_per_gene = gff
+  .records
+  .find_all{ |record| record.feature == "CDS" }
+  .group_by{ |record| Hash[record.attributes]["Parent"] }
+  .values
+  .flat_map do |records|
+  records.length
+end
+$stderr.puts "CDS counts per gene mean: #{cds_per_gene.mean}"
+$stderr.puts "CDS counts per gene stddev: #{cds_per_gene.standard_deviation}"
+
+intergenic_lengths = gff
+  .records
+  .find_all{ |record| record.feature == "gene" }
+  .group_by{ |record| record.seqname }
+  .flat_map do |seqname, records|
+  records
+    .sort_by{ |record| record.start }
     .each_cons(2)
     .map{ |a, b| b.start - a.end - 1 }
 end
 
-puts "Gene count = #{gff.records.count{|r| r.feature == 'gene'}}"
-puts "Mean intergenic distance = #{intergenic_distances.mean}"
-puts "Stdev intergenic distance = #{intergenic_distances.standard_deviation}"
+$stderr.puts "Intergenic length mean: #{intergenic_lengths.mean}"
+$stderr.puts "Intergenic length stddev: #{intergenic_lengths.standard_deviation}"
 
+gene_count = gff
+  .records
+  .find_all{ |record| record.feature == "gene" }
+  .count
+
+puts "Gene count = #{gff.records.count{|r| r.feature == 'gene'}}"
