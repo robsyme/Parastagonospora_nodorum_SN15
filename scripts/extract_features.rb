@@ -30,6 +30,10 @@ OptionParser.new do |opts|
       opts.abort "Could not find the file '#{filename}'"
     end
   end
+
+  opts.on("-t", "--[no-]translate", "Translate the CDS sequence") do |t|
+    options.translate = t
+  end
   
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options.verbose = v
@@ -49,19 +53,21 @@ cds_features.each do |key, value|
   a = value
     .sort_by{|split| split[3].to_i}
     .map{|split| options.fasta[split[0]].subseq(split[3].to_i, split[4].to_i)}
-  
+
+  seq = Bio::Sequence::NA.new(a.join)
   if value.first[6] == "+"
-    seq = Bio::Sequence::NA.new(a.join).translate
+    prot = seq.translate
     ok = true
-    if seq.composition["*"] <= 1
-      puts seq[0..-2].to_fasta(key, 80)
+    if prot.composition["*"] <= 1
+      puts options.translate ? prot[0..-2].to_fasta(key, 80) : seq.to_fasta(key,80)
     else
       $stderr.puts "Protein #{key} is invalid"
     end      
   else
-    seq = Bio::Sequence::NA.new(a.join).reverse_complement.translate
-    if seq.composition["*"] <= 1
-      puts seq[0..-2].to_fasta(key, 80)
+    seq.reverse_complement!
+    prot = seq.translate
+    if prot.composition["*"] <= 1
+      puts options.translate ? prot[0..-2].to_fasta(key, 80) : seq.to_fasta(key,80)
     else
       $stderr.puts "Protein #{key} is invalid"
     end      
