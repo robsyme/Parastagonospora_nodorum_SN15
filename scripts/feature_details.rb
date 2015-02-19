@@ -68,7 +68,7 @@ intergenic_lengths = gff
   records
     .sort_by{ |record| record.start }
     .each_cons(2)
-    .map{ |a, b| b.start - a.end - 1 }
+    .map{ |a, b| length = b.start - a.end - 1; length > 0 ? length : 0}
 end
 
 puts "Intergenic length mean: #{intergenic_lengths.mean}"
