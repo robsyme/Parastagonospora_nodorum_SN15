@@ -1,50 +1,18 @@
-ACNFP Gene Models
+Parastagonospora nodorum SN15 Gene Models
 ==========
 
+Introduction
+------------
 Recently-sequenced non-model organisms often have a set of gene models that evolve quite quickly, and it is easy to lose track of why particular genes were added, removed or modified.
 Checking final models into NCBI is the endpoint, but it in't feasible if you are going repeated rounds of gene model adjustment.
 Checking our gene models into version control allows us to track who editied which models and why (assuming that people leave sensible commit messages). 
 
 * * * * *
-Genomes Currently Available
-----------
 
-### Stagonospora nodorum sn15 ###
+About
+-----
+This assembly was manually annotated using data from proteomics, transcriptomics and microarray studies. We are currently preparing a manuscript for publication. If you use these annotations in your own work, we kindly ask that you cite 
 
-S. nodorum sn15 was the first genome published by the ACNFP ([Hane et al., 2007](http://dx.doi.org/10.1105/tpc.107.052829)).
-TODO: *Short* background to the sn15 sequencing project and results.
+Syme, R. A et al. Comprehensive annotation of a fungal pathogen genome using next-generation genomics, transcriptomics and proteogenomics
 
-Genomes Coming Soon
-----------
-### Stagonospora nodorum sn79-1087 ###
-### Stagonospora nodorum sn4 ###
-### Pyrenophora teres sp. teres ###
-
-
-* * * * *
-Wishlist (TODO)
-----------
-
-### Split Repo Into Public and Private ###
-NOTE: This may not be necessary.
-At the moment, anyone who can see the master branch can also see us working behind the scenes. It might be cleaner to have two repos: A public repo that takes major version upgrades, and a private repo that only the group can see. It is easy to push the private master up to the public repo for people to see. This adds an extra level of complication, and may not be necessary. I don't think people will really care about our draft branches anyway.
-
-### Gene Model Validation via git-hooks ###
-It is likely that at some point, mistakes will be made with gene model corrections. A number of simple mistakes could be identified before the changes are commited by having a script do a quick sanity check before commits.
-
-### Wiki ###
-It would be nice to run through each of the genes and generate a wiki page for each. Less structured information could then be added by those that are not comfortable with the command line and git. Perhaps a basic template can be set up that has defined fields that are then scraped by a [commit hook](http://www.kernel.org/pub/software/scm/git/docs/githooks.html) that updates the gff. An example of a set field might be a boolean flag "Has this gene model been confirmed by experimental data?".
-This approach of bi-directional updates might be a little fragile, but the fragility could be mitigated by a very formal gene wiki page template with a small number of very strict fields. Of course, the rest of the wiki page for each gene would be completely editable, allowing for informal notes to be taken.
-#### PROS ####
-- Keeps all relevant data in the same place
-- Easy to control access
-- Free version control of the wiki
-- Easy layout control
-
-#### CONS ####
-- Might be dangerous to let the gff be editable from the wiki (via hooks)
-- Might be too complicated
-- Github will sanitize javascript, so no fancy canvas tag renderings. This would have been awesome, but something similar might be possible with svg (including links!).
-
-
-A similar, but more flexible approach would be to have a small [Sinatra](http://www.sinatrarb.com/) app that takes care of the wiki rendering and updates. The app could be notified of changes to the gff via the github service hooks. This would give us the flexibility to add custom javascript to render gene models or blast hits in the wiki.
+When it is accepted.
